@@ -44,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: 'Enter Your User Name',
                       labelText: 'User Name',
                     ),
+                    // ignore: missing_return
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please Enter User Name';
@@ -58,6 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: 'Enter Your Password',
                       labelText: 'Password',
                     ),
+                    // ignore: missing_return
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please Enter Password';

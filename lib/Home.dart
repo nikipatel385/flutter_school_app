@@ -58,6 +58,7 @@ class _homeState extends State<home> {
                     onSuggestionSelected: (suggestion) {
                       this._typeAheadController.text = suggestion;
                     },
+                    // ignore: missing_return
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please Select a School';
