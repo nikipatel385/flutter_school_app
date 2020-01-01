@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
             autovalidate: true,
             child: Padding(
               padding: EdgeInsets.all(32.0),
-              child: Column(
+              child: ListView(
                 children: <Widget>[
                   TextFormField(
                     controller: nameController,
