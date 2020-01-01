@@ -11,7 +11,7 @@ class _TeacherPageState extends State<TeacherPage> {
     return WillPopScope(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Parents App'),
+          title: Text('Teacher App'),
         ),
         body: Center(
           child: Text('Hello Teacher'),
