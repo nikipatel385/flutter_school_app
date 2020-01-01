@@ -11,7 +11,7 @@ class _AdminPageState extends State<AdminPage> {
     return WillPopScope(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Teacher App'),
+          title: Text('Admin App'),
         ),
         body: Center(
           child: Text('Hello Admin'),
