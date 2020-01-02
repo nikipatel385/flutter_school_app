@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
@@ -12,6 +14,32 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+
+  static final String url = 'http://172.16.17.141/app_teacher_school_list.php';
+  static final auth = 'Trizinno2019';
+  List data;
+
+  Future<String> getJSONdata() async {
+    var response =
+    await http.get(Uri.encodeFull(url), headers: {"auth": "Trizinno2019"});
+    print(response.body);
+
+    setState(() {
+      var dataConvertedToJSON = json.decode(response.body);
+      data = dataConvertedToJSON['data'];
+    });
+
+    return 'successful';
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    this.getJSONdata();
+  }
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final TextEditingController _typeAheadController = TextEditingController();
