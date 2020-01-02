@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
                   TextFormField(
                     controller: nameController,
                     decoration: InputDecoration(
-                      icon: const Icon(Icons.person),
+                      icon: const Icon(Icons.person_pin),
                       hintText: 'Enter Your User Name',
                       labelText: 'User Name',
                     ),
