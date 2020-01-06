@@ -58,33 +58,26 @@ class _homeState extends State<home> {
               child: Column(
                 children: <Widget>[
                   TypeAheadFormField(
+
                     textFieldConfiguration: TextFieldConfiguration(
                       autofocus: true,
                       controller: this._typeAheadController,
+
                       decoration:
                           InputDecoration(hintText: 'Select Your School'),
                     ),
-                    suggestionsCallback: (pattern) async {
-                      Completer<List<String>> completer = new Completer();
-
-                      completer.complete(<String>[
-                        "L.P.Savani",
-                        "P.P.Savani",
-                        "S.D.J.Jain",
-                        "Samrat International",
-                        "Little Flower"
-                      ]);
-
-                      return completer.future;
+                    debounceDuration: const Duration(milliseconds: 300),
+                    suggestionsCallback: (pattern)  {
+                      return data;
                     },
                     itemBuilder: (context, suggestion) {
-                      return ListTile(title: Text(suggestion));
+                      return ListTile(title: Text(suggestion['SCHOOL_NAME']));
                     },
                     transitionBuilder: (context, suggestionsBox, controller) {
                       return suggestionsBox;
                     },
                     onSuggestionSelected: (suggestion) {
-                      this._typeAheadController.text = suggestion;
+                      this._typeAheadController.text = suggestion['SCHOOL_NAME'];
                     },
                     // ignore: missing_return
                     validator: (value) {
