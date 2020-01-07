@@ -1,14 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'LoginPage.dart';
 
 class home extends StatefulWidget {
+  home({Key key}) : super(key: key);
+
   @override
   _homeState createState() => _homeState();
 }
@@ -37,6 +40,19 @@ class _homeState extends State<home> {
     super.initState();
 
     this.getJSONdata();
+
+    cekLogin();
+
+  }
+
+  Future cekLogin() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    if (pref.getBool('isLogin')) {
+      Navigator.of(context).pushAndRemoveUntil(
+          new MaterialPageRoute(
+              builder: (BuildContext context) => new LoginPage()),
+              (Route<dynamic> route) => false);
+    }
   }
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -55,6 +71,7 @@ class _homeState extends State<home> {
             child: Padding(
               padding: EdgeInsets.all(32.0),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   TypeAheadFormField(
                     textFieldConfiguration: TextFieldConfiguration(
@@ -85,28 +102,79 @@ class _homeState extends State<home> {
                     },
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 100.0, right: 100.0),
-                    child: RaisedButton(
-                        color: Theme.of(context).accentColor,
-                        textColor: Theme.of(context).primaryColorDark,
-                        child: const Text(
-                          'Submit',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
-                          if (_formKey.currentState.validate()) {
-                            var route = MaterialPageRoute(
-                              builder: (BuildContext context) => LoginPage(),
-                            );
+                    margin: EdgeInsets.only(
+                        right: 100.0, left: 100.0, top: 30.0, bottom: 30.0),
 
-                            Navigator.of(context).push(route);
-                          }
-                        }),
+                    decoration:
+                        new BoxDecoration(color: Theme.of(context).accentColor),
+
+                    child: ListTile(
+                      title: Text(
+                        'Submit',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onTap: _navigator,
+                    ),
+
+//                    child: RaisedButton (
+//                        color: Theme.of(context).accentColor,
+//                        textColor: Theme.of(context).primaryColorDark,
+//                        child: const Text(
+//                          'Submit',
+//                          style: TextStyle(color: Colors.white),
+//                        ),
+//                        onPressed: () {
+//                          if (_formKey.currentState.validate()) {
+//
+//                            Future<SharedPreferences> pref = SharedPreferences.getInstance();
+//
+//
+//
+//                            var route = MaterialPageRoute(
+//                              builder: (BuildContext context) => LoginPage(),
+//                            );
+//
+//                            Navigator.of(context).push(route);
+//                          }
+//                        }),
                   )
                 ],
               ),
             ),
           ),
         ));
+  }
+
+  void _navigator() async {
+    if (_formKey.currentState.validate()) {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      pref.setBool('isLogin', true);
+
+      Navigator.of(context).pushAndRemoveUntil(
+          new MaterialPageRoute(
+              builder: (BuildContext context) => new LoginPage()),
+          (Route<dynamic> route) => false);
+    } else {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      pref.setBool("isLogin", false);
+
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          child: new CupertinoAlertDialog(
+            content: new Text(
+              "please select Your school",
+              style: new TextStyle(fontSize: 16.0),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: new Text("OK"))
+            ],
+          ));
+    }
   }
 }
