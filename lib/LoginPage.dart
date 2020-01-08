@@ -37,6 +37,10 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.all(32.0),
               child: ListView(
                 children: <Widget>[
+                  Image.network(
+                      'http:\/\/172.16.17.141\/mmiserp\/assets\/logo.png',
+                      height: 70.0,
+                      width: 70.0),
                   TextFormField(
                     controller: nameController,
                     decoration: InputDecoration(
