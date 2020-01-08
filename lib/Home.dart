@@ -42,16 +42,15 @@ class _homeState extends State<home> {
     this.getJSONdata();
 
     cekLogin();
-
   }
 
-  Future cekLogin() async{
+  Future cekLogin() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     if (pref.getBool('isLogin')) {
       Navigator.of(context).pushAndRemoveUntil(
           new MaterialPageRoute(
               builder: (BuildContext context) => new LoginPage()),
-              (Route<dynamic> route) => false);
+          (Route<dynamic> route) => false);
     }
   }
 
