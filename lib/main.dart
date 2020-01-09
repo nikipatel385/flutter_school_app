@@ -7,6 +7,6 @@ void main() {
     debugShowCheckedModeBanner: false,
     title: 'MyApp',
     home: home(),
-    theme: ThemeData(primaryColor: Colors.indigo, accentColor: Colors.indigoAccent),
+    theme: ThemeData(primaryColor: Colors.lightBlue,accentColor: Colors.lightBlueAccent),
   ));
 }

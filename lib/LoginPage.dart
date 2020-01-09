@@ -26,9 +26,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Login'),
-        ),
         body: Center(
           child: Form(
             key: _formKey,
@@ -37,10 +34,18 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.all(32.0),
               child: ListView(
                 children: <Widget>[
+
+                  Padding(
+                    padding: EdgeInsets.only(top: 50.0),
+                  ),
                   Image.network(
                       'http:\/\/172.16.17.141\/mmiserp\/assets\/logo.png',
-                      height: 70.0,
-                      width: 70.0),
+                      height: 100.0,
+                      width: 100.0),
+
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 80.0),
+                  ),
                   TextFormField(
                     controller: nameController,
                     decoration: InputDecoration(
@@ -96,6 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
                   Container(
+                    padding: EdgeInsets.only(top: 40.0),
                     margin: EdgeInsets.only(left: 100.0, right: 100.0),
                     child: RaisedButton(
                       color: Theme.of(context).accentColor,
