@@ -57,6 +57,7 @@ class _homeState extends State<home> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final TextEditingController _typeAheadController = TextEditingController();
+  final _minpadding = 5.0;
 
   @override
   Widget build(BuildContext context) {
@@ -65,65 +66,64 @@ class _homeState extends State<home> {
       child: Form(
         key: this._formKey,
         child: Padding(
-          padding: EdgeInsets.all(12.0),
+          padding: EdgeInsets.all(_minpadding * 2),
           child: ListView(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.all(20.0),
-              ),
-              Image.asset(
-                'assets/images/OIP.jpg',
-                width: 150.0,
-                height: 150.0,
+                padding: EdgeInsets.all(_minpadding * 9),
+                child: Image.asset(
+                  'assets/images/OIP.jpg',
+                  width: 150.0,
+                  height: 150.0,
+                ),
               ),
               Padding(
-                padding: EdgeInsets.all(100.0),
-              ),
-              TypeAheadFormField(
-                textFieldConfiguration: TextFieldConfiguration(
-                  autofocus: true,
-                  controller: this._typeAheadController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                      ),
-                      prefixIcon: Icon(Icons.school),
-                      hintText: 'Select Your School'),
+                padding: EdgeInsets.only(top: _minpadding * 30),
+                child: TypeAheadFormField(
+                  textFieldConfiguration: TextFieldConfiguration(
+                    autofocus: true,
+                    controller: this._typeAheadController,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                        ),
+                        prefixIcon: Icon(Icons.school),
+                        hintText: 'Select Your School'),
+                  ),
+                  debounceDuration: const Duration(milliseconds: 300),
+                  suggestionsCallback: (pattern) {
+                    return data;
+                  },
+                  itemBuilder: (context, suggestion) {
+                    return ListTile(title: Text(suggestion['SCHOOL_NAME']));
+                  },
+                  transitionBuilder: (context, suggestionsBox, controller) {
+                    return suggestionsBox;
+                  },
+                  onSuggestionSelected: (suggestion) {
+                    this._typeAheadController.text = suggestion['SCHOOL_NAME'];
+                  },
+                  // ignore: missing_return
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please Select a School';
+                    }
+                  },
                 ),
-                debounceDuration: const Duration(milliseconds: 300),
-                suggestionsCallback: (pattern) {
-                  return data;
-                },
-                itemBuilder: (context, suggestion) {
-                  return ListTile(title: Text(suggestion['SCHOOL_NAME']));
-                },
-                transitionBuilder: (context, suggestionsBox, controller) {
-                  return suggestionsBox;
-                },
-                onSuggestionSelected: (suggestion) {
-                  this._typeAheadController.text = suggestion['SCHOOL_NAME'];
-                },
-                // ignore: missing_return
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please Select a School';
-                  }
-                },
               ),
               Container(
                 margin: EdgeInsets.only(
                     right: 70.0, left: 70.0, top: 30.0, bottom: 30.0),
 
-                decoration:
-                    new BoxDecoration(
-                        color: Theme.of(context).accentColor),
+                decoration: new BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    color: Theme.of(context).accentColor),
 
                 child: ListTile(
-
                   title: Text(
                     'Submit',
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white,fontSize: 20.0),
+                    style: TextStyle(color: Colors.white, fontSize: 20.0),
                   ),
                   onTap: _navigator,
                 ),
