@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_school/LoginPage.dart';
 
 class AdminPage extends StatefulWidget {
   @override
@@ -40,9 +41,12 @@ class _AdminPageState extends State<AdminPage> {
               ),
               Divider(),
               ListTile(
-                title: Text("Close"),
-                trailing: const Icon(Icons.close),
-                onTap: () => Navigator.of(context).pop(),
+                title: Text("Log Out"),
+                trailing: const Icon(Icons.power_settings_new),
+                onTap: () =>
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return LoginPage();
+                })),
               )
             ],
           ),
