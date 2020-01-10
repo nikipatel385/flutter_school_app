@@ -23,6 +23,25 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController pswdController = TextEditingController();
 
   String _password;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    // cekLogin();
+  }
+
+//  Future cekLogin() async {
+//    SharedPreferences pref = await SharedPreferences.getInstance();
+//    if (pref.getBool('isLogin')) {
+//      Navigator.of(context).pushAndRemoveUntil(
+//          new MaterialPageRoute(
+//              builder: (BuildContext context) => new LoginPage()),
+//          (Route<dynamic> route) => false);
+//    }
+//  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -79,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Password';
-                        }else if (value.length < 6) {
+                        } else if (value.length < 6) {
                           return 'Invalid Password';
                         }
                       },
@@ -134,6 +153,8 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () {
                             if (_currentItemSelected == 'Teacher') {
                               if (_formKey.currentState.validate()) {
+//                                SharedPreferences pref = await SharedPreferences.getInstance();
+//                                pref.setBool('isLogin', true);
                                 var route = MaterialPageRoute(
                                   builder: (BuildContext context) =>
                                       TeacherPage(),
@@ -143,6 +164,8 @@ class _LoginPageState extends State<LoginPage> {
                               }
                             } else if (_currentItemSelected == 'Parents') {
                               if (_formKey.currentState.validate()) {
+//                                SharedPreferences pref = await SharedPreferences.getInstance();
+//                                  pref.setBool('isLogin', true);
                                 var route = MaterialPageRoute(
                                   builder: (BuildContext context) =>
                                       ParentsPage(),
@@ -152,6 +175,8 @@ class _LoginPageState extends State<LoginPage> {
                               }
                             } else if (_currentItemSelected == 'Admin') {
                               if (_formKey.currentState.validate()) {
+//                                SharedPreferences pref = await SharedPreferences.getInstance();
+//                                pref.setBool('isLogin', true);
                                 var route = MaterialPageRoute(
                                   builder: (BuildContext context) =>
                                       AdminPage(),
@@ -159,6 +184,27 @@ class _LoginPageState extends State<LoginPage> {
 
                                 Navigator.of(context).push(route);
                               }
+                            } else {
+//                              SharedPreferences pref = await SharedPreferences.getInstance();
+//                              pref.setBool("isLogin", false);
+
+                              showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  child: new AlertDialog(
+                                    title: Text('Select'),
+                                    content: new Text(
+                                      "please select Your school",
+                                      style: new TextStyle(fontSize: 16.0),
+                                    ),
+                                    actions: <Widget>[
+                                      new FlatButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: new Text("OK"))
+                                    ],
+                                  ));
                             }
                           },
                         ),

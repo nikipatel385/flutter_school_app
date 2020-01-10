@@ -64,7 +64,7 @@ class _homeState extends State<home> {
       child: Form(
         key: this._formKey,
         child: Padding(
-          padding: EdgeInsets.all(_minpadding * 2),
+          padding: EdgeInsets.all(_minpadding * 7),
           child: ListView(
             children: <Widget>[
               Padding(
@@ -76,55 +76,77 @@ class _homeState extends State<home> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: _minpadding * 15),
+                  padding: EdgeInsets.only(top: _minpadding * 3),
+                  child: Center(
+                    child: Text(
+                      'Academic',
+                      style: TextStyle(
+                          inherit: true,
+                          fontSize: 50.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'FredokaOne-Regular',
+                          shadows: [
+                            Shadow(
+                                color: Colors.black12,
+                                blurRadius: 1.0,
+                                offset: Offset(5.0, 5.0))
+                          ],
+                          color: Colors.teal),
+                    ),
+                  )),
+              Padding(
+                padding: EdgeInsets.only(top: _minpadding * 30),
                 child: TypeAheadFormField(
-                  textFieldConfiguration: TextFieldConfiguration(
-                    autofocus: true,
-                    controller: this._typeAheadController,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                        ),
-                        prefixIcon: Icon(Icons.school),
-                        hintText: 'Select Your School'),
-                  ),
-                  debounceDuration: const Duration(milliseconds: 300),
-                  suggestionsCallback: (pattern) {
-                    return data;
-                  },
-                  itemBuilder: (context, suggestion) {
-                    return ListTile(title: Text(suggestion['SCHOOL_NAME']));
-                  },
-                  transitionBuilder: (context, suggestionsBox, controller) {
-                    return suggestionsBox;
-                  },
-                  onSuggestionSelected: (suggestion) {
-                    this._typeAheadController.text = suggestion['SCHOOL_NAME'];
-                  },
-                  // ignore: missing_return
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please Select a School';
-                    }
-                  }
-                ),
+                    textFieldConfiguration: TextFieldConfiguration(
+                      autofocus: true,
+                      controller: this._typeAheadController,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0)),
+                          ),
+                          prefixIcon: Icon(Icons.school),
+                          hintText: 'Select Your School'),
+                    ),
+                    debounceDuration: const Duration(milliseconds: 300),
+                    suggestionsCallback: (pattern) {
+                      return data;
+                    },
+                    itemBuilder: (context, suggestion) {
+                      return ListTile(title: Text(suggestion['SCHOOL_NAME']));
+                    },
+                    transitionBuilder: (context, suggestionsBox, controller) {
+                      return suggestionsBox;
+                    },
+                    onSuggestionSelected: (suggestion) {
+                      this._typeAheadController.text =
+                          suggestion['SCHOOL_NAME'];
+                    },
+                    // ignore: missing_return
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please Select a School';
+                      }
+                    }),
               ),
-              Container(
-                margin: EdgeInsets.only(
-                    right: 70.0, left: 70.0, top: 30.0, bottom: 30.0),
-
-                decoration: new BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                    color: Theme.of(context).accentColor),
-
-                child: ListTile(
-                  title: Text(
-                    'Submit',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white, fontSize: 20.0),
-                  ),
-                  onTap: _navigator,
-                ),
+              Padding(
+                  padding: EdgeInsets.only(top: _minpadding * 3),
+                  child: Container(
+                    margin: EdgeInsets.only(left: 100.0, right: 100.0),
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0)),
+                      color: Theme.of(context).accentColor,
+                      textColor: Theme.of(context).primaryColorDark,
+                      child: const Text(
+                        'Submit',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        _navigator();
+                      },
+                    ),
+                  )),
 
 //                    child: RaisedButton (
 //                        color: Theme.of(context).accentColor,
@@ -147,7 +169,6 @@ class _homeState extends State<home> {
 //                            Navigator.of(context).push(route);
 //                          }
 //                        }),
-              )
             ],
           ),
         ),
