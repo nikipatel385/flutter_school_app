@@ -10,6 +10,9 @@ class _TeacherPageState extends State<TeacherPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('Teacher App'),
+        ),
         body: Center(
           child: Text('Hello Teacher'),
         ),
