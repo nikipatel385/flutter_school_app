@@ -10,9 +10,6 @@ class _ParentsPageState extends State<ParentsPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Parents App'),
-        ),
         body: Center(
           child: Text('Hello Parents'),
         ),
