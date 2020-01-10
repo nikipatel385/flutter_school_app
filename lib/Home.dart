@@ -88,7 +88,7 @@ class _homeState extends State<home> {
                           shadows: [
                             Shadow(
                                 color: Colors.black12,
-                                blurRadius: 1.0,
+                                blurRadius: 3.0,
                                 offset: Offset(5.0, 5.0))
                           ],
                           color: Colors.teal),
