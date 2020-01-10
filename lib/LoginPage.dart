@@ -22,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
 
   TextEditingController pswdController = TextEditingController();
 
+  String _password;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -78,8 +79,11 @@ class _LoginPageState extends State<LoginPage> {
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please Enter Password';
+                        }else if (value.length < 6) {
+                          return 'Invalid Password';
                         }
                       },
+                      onSaved: (value) => _password = value,
                     ),
                   ),
                   Padding(

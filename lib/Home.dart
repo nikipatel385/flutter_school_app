@@ -68,15 +68,15 @@ class _homeState extends State<home> {
           child: ListView(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.all(_minpadding * 9),
+                padding: EdgeInsets.all(_minpadding * 2),
                 child: Image.asset(
-                  'assets/images/OIP.jpg',
-                  width: 150.0,
-                  height: 150.0,
+                  'assets/images/logo.jpg',
+                  width: 100.0,
+                  height: 100.0,
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: _minpadding * 30),
+                padding: EdgeInsets.only(top: _minpadding * 15),
                 child: TypeAheadFormField(
                   textFieldConfiguration: TextFieldConfiguration(
                     autofocus: true,
@@ -106,7 +106,7 @@ class _homeState extends State<home> {
                     if (value.isEmpty) {
                       return 'Please Select a School';
                     }
-                  },
+                  }
                 ),
               ),
               Container(
