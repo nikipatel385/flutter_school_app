@@ -76,7 +76,7 @@ class _homeState extends State<home> {
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.only(top: _minpadding * 3),
+                  padding: EdgeInsets.only(top: _minpadding),
                   child: Center(
                     child: Text(
                       'Academic',
