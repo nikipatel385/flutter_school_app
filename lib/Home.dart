@@ -7,14 +7,14 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'LoginPage.dart';
 
-class home extends StatefulWidget {
-  home({Key key}) : super(key: key);
+class Home extends StatefulWidget {
+  Home({Key key}) : super(key: key);
 
   @override
-  _homeState createState() => _homeState();
+  _HomeState createState() => _HomeState();
 }
 
-class _homeState extends State<home> {
+class _HomeState extends State<Home> {
   static final String url = 'http://172.16.17.141/app_teacher_school_list.php';
   static final auth = 'Trizinno2019';
   List data;
