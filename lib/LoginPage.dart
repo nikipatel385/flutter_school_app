@@ -18,9 +18,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  var _loginName = ['Teacher', 'Parents', 'Admin'];
+  var _loginName = ['Select', 'Teacher', 'Parents', 'Admin'];
   final _minpadding = 5.0;
-  var _currentItemSelected = 'Admin';
+  var _currentItemSelected = 'Select';
 
   TextEditingController nameController = TextEditingController();
 
@@ -65,20 +65,53 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: _minpadding * 20),
+                    child: FormField(
+                      builder: (FormFieldState state) {
+                        return InputDecorator(
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0)),
+                              ),
+                              prefixIcon: Icon(Icons.perm_identity),
+                              hintText: 'Login As',
+                              labelText: 'Login As'),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              isDense: true,
+                              items: _loginName.map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              value: _currentItemSelected,
+                              onChanged: (String newValueSelected) {
+                                _onDropDownItemSelected(newValueSelected);
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: _minpadding * 3),
                     child: TextFormField(
                       controller: nameController,
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(30.0)),
                         ),
-                        prefixIcon: Icon(Icons.person_pin),
-                        hintText: 'Enter Your User Name',
-                        labelText: 'User Name',
+                        prefixIcon: Icon(Icons.phone),
+                        hintText: 'Enter Your Mobile Number',
+                        labelText: 'Mobile Number',
                       ),
                       // ignore: missing_return
                       validator: (value) {
                         if (value.isEmpty) {
-                          return 'Please Enter User Name';
+                          return 'Please Enter Mobile Number';
                         }
                       },
                     ),
@@ -105,38 +138,6 @@ class _LoginPageState extends State<LoginPage> {
                         }
                       },
                       onSaved: (value) => _password = value,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: _minpadding * 3),
-                    child: FormField(
-                      builder: (FormFieldState state) {
-                        return InputDecorator(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30.0)),
-                            ),
-                            prefixIcon: Icon(Icons.perm_identity),
-                            hintText: "Login As",
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton<String>(
-                              isDense: true,
-                              items: _loginName.map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                              value: _currentItemSelected,
-                              onChanged: (String newValueSelected) {
-                                _onDropDownItemSelected(newValueSelected);
-                              },
-                            ),
-                          ),
-                        );
-                      },
                     ),
                   ),
                   Padding(
