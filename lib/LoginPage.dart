@@ -7,6 +7,10 @@ import 'package:flutter_school/TeacherPage.dart';
 import 'package:flutter_school/AdminPage.dart';
 
 class LoginPage extends StatefulWidget {
+  final String logo;
+
+  LoginPage({this.logo});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -56,10 +60,8 @@ class _LoginPageState extends State<LoginPage> {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.only(top: 50.0),
-                    child: Image.network(
-                        'http:\/\/172.16.17.141\/mmiserp\/assets\/logo.png',
-                        height: 100.0,
-                        width: 100.0),
+                    child:
+                        Image.network(widget.logo, height: 100.0, width: 100.0),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: _minpadding * 20),

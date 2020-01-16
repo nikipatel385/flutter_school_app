@@ -121,6 +121,13 @@ class _homeState extends State<home> {
                     onSuggestionSelected: (suggestion) {
                       this._typeAheadController.text =
                           suggestion['SCHOOL_NAME'];
+                      if (this._typeAheadController.text ==
+                          suggestion['SCHOOL_NAME']) {
+                        var route = MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                LoginPage(logo: suggestion['SCHOOL_LOGO']));
+                        Navigator.of(context).push(route);
+                      }
                     },
                     // ignore: missing_return
                     validator: (value) {
@@ -129,24 +136,24 @@ class _homeState extends State<home> {
                       }
                     }),
               ),
-              Padding(
-                  padding: EdgeInsets.only(top: _minpadding * 3),
-                  child: Container(
-                    margin: EdgeInsets.only(left: 100.0, right: 100.0),
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0)),
-                      color: Theme.of(context).accentColor,
-                      textColor: Theme.of(context).primaryColorDark,
-                      child: const Text(
-                        'Submit',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () {
-                        _navigator();
-                      },
-                    ),
-                  )),
+//              Padding(
+//                  padding: EdgeInsets.only(top: _minpadding * 3),
+//                  child: Container(
+//                    margin: EdgeInsets.only(left: 100.0, right: 100.0),
+//                    child: RaisedButton(
+//                      shape: RoundedRectangleBorder(
+//                          borderRadius: BorderRadius.circular(30.0)),
+//                      color: Theme.of(context).accentColor,
+//                      textColor: Theme.of(context).primaryColorDark,
+//                      child: const Text(
+//                        'Submit',
+//                        style: TextStyle(color: Colors.white),
+//                      ),
+//                      onPressed: () {
+//                        _navigator();
+//                      },
+//                    ),
+//                  )),
 
 //                    child: RaisedButton (
 //                        color: Theme.of(context).accentColor,
